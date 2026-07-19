@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://techsense.local/schemas/article.json",
+  "title": "Article",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "article_id",
+    "source_name",
+    "source_url",
+    "title",
+    "url",
+    "published_at",
+    "ingested_at",
+    "content_summary",
+    "relevance_score",
+    "status"
+  ],
+  "properties": {
+    "article_id": {
+      "type": "string",
+      "description": "Stable unique identifier derived from the source item.",
+      "minLength": 1
+    },
+    "source_name": {
+      "type": "string",
+      "description": "Human-readable source name such as IETF Datatracker or AWS Open Source Blog.",
+      "minLength": 1
+    },
+    "source_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Canonical feed or source URL."
+    },
+    "title": {
+      "type": "string",
+      "description": "Original article title.",
+      "minLength": 1
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Canonical link to the article."
+    },
+    "author": {
+      "type": ["string", "null"],
+      "description": "Optional author or publication metadata."
+    },
+    "published_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Source publication timestamp."
+    },
+    "ingested_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the ingestion Lambda stored the item."
+    },
+    "content_summary": {
+      "type": "string",
+      "description": "Short pre-LLM or post-LLM summary used by the scoring step.",
+      "minLength": 1
+    },
+    "tags": {
+      "type": "array",
+      "description": "Topic labels used for filtering and ranking.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "source_priority": {
+      "type": "integer",
+      "description": "Optional priority to favor high-signal sources in ranking.",
+      "minimum": 1,
+      "maximum": 10
+    },
+    "relevance_score": {
+      "type": "number",
+      "description": "Score assigned by the scoring Lambda.",
+      "minimum": 0
+    },
+    "duplicate_of": {
+      "type": ["string", "null"],
+      "description": "References the canonical article_id if this item is a duplicate."
+    },
+    "status": {
+      "type": "string",
+      "description": "Pipeline state for the article.",
+      "enum": ["ingested", "scored", "selected", "summarized", "delivered", "discarded"]
+    },
+    "content_hash": {
+      "type": ["string", "null"],
+      "description": "Hash used for deduplication and idempotency."
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Optional extension point for source-specific or AI-ready attributes.",
+      "additionalProperties": true
+    }
+  },
+  "examples": [
+    {
+      "article_id": "ietf-2026-07-18-rfc-10008",
+      "source_name": "IETF Datatracker",
+      "source_url": "https://datatracker.ietf.org/doc/feed/",
+      "title": "RFC 10008: Example Protocol Update",
+      "url": "https://datatracker.ietf.org/doc/html/rfc10008",
+      "author": null,
+      "published_at": "2026-07-18T10:00:00Z",
+      "ingested_at": "2026-07-18T10:05:00Z",
+      "content_summary": "Protocol update relevant to HTTP and Internet standards governance.",
+      "tags": ["ietf", "protocol", "http"],
+      "source_priority": 1,
+      "relevance_score": 92.4,
+      "duplicate_of": null,
+      "status": "scored",
+      "content_hash": "sha256:example",
+      "metadata": {
+        "pipeline": "techsense-mvp"
+      }
+    }
+  ],
+  "ai_ready_integration_schema": [
+    {
+      "feature_name": "article_ingestion_contract",
+      "priority": "high",
+      "cost_impact_estimated": 0.2,
+      "ai_agent_task": "Validate that incoming RSS entries are normalized into the Article schema without adding unnecessary fields.",
+      "dependencies": ["AWS Lambda", "Amazon DynamoDB"]
+    },
+    {
+      "feature_name": "article_scoring_contract",
+      "priority": "high",
+      "cost_impact_estimated": 0.3,
+      "ai_agent_task": "Ensure the scoring Lambda consumes and returns the Article object consistently for ranking and deduplication.",
+      "dependencies": ["AWS Lambda", "Amazon Bedrock", "Amazon DynamoDB"]
+    }
+  ]
+}
