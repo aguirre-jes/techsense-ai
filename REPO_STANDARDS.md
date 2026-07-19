@@ -34,11 +34,11 @@ techsense/
 │   └── state/
 ├── docs/
 │   ├── ADR-001-TechStack.md
-│   ├── data_schemas.json
-│   ├── infra_naming_conventions.md
-│   ├── runbook_ingestion_failure.md
+│   ├── DATA_SCHEMAS.json
+│   ├── INFRA_NAMING_CONVENTIONS.md
+│   ├── RUNBOOK_INGESTION_FAILURE.md
 │   ├── system_design.md
-│   └── test_specs.md
+│   └── TEST_SPECS.md
 ├── tests/
 │   ├── unit/
 │   └── integration/

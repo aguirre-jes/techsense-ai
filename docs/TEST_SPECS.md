@@ -17,7 +17,7 @@ Duplicate suppression protects the weekly email from noise and keeps Bedrock usa
 
 ## Quality Gate 2: Valid JSON Output
 ### Requirement
-The scoring Lambda must return valid JSON that conforms to the Article schema in `docs/data_schemas.json`.
+The scoring Lambda must return valid JSON that conforms to the Article schema in `docs/DATA_SCHEMAS.json`.
 
 ### Acceptance Criteria
 - The function response parses successfully as JSON.
