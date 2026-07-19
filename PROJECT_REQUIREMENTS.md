@@ -32,23 +32,23 @@ The initial MVP should prioritize a small, high-signal set of feeds drawn from t
 **Recommended MVP subset:** Start with IETF Datatracker, AWS Open Source Blog, and Cloudflare Engineering, then expand to the other feeds once ranking quality and delivery cadence are stable.
 
 ### Iteration 2 (Phase 2: Scalability & Observability)
-*   **Scope:** Migrating the pipeline to Amazon ECS on AWS Fargate.
-*   **Architecture:** Containerized Go/Python workers, SQS for decoupling tasks, OpenTelemetry for tracing.
-*   **Benefit:** Portability and alignment with container best practices.
+*   **Scope:** Extend the Lambda-first pipeline with stronger observability, better scheduling, and more explicit cost controls.
+*   **Architecture:** AWS Lambda event-driven workers, DynamoDB for state, CloudWatch logs and metrics, and optional Step Functions only if the workflow grows beyond a single scheduled digest.
+*   **Benefit:** Preserves the low-cost, low-ops model while improving reliability and visibility.
 
 ### Iteration 3 (Phase 3: Robust Intelligence)
-*   **Scope:** Multi-agent system. One agent for ingestion/scoring, one for deep technical analysis, one for delivery management.
-*   **Architecture:** ECS Fargate + Step Functions. 
-*   **Cost Strategy:** Managed by credits, monitoring via CloudWatch Cost Explorer.
+*   **Scope:** Multi-stage intelligence pipeline with stronger reasoning, deeper article analysis, and optional channel expansion.
+*   **Architecture:** AWS Lambda + Step Functions + DynamoDB + Bedrock, with the option to introduce containers only if a future workload clearly requires them.
+*   **Cost Strategy:** Managed by credits, with usage and model spend monitored against the $500 annual cap.
 
 ## 4. Architectural Diagram
 
 ```mermaid
 graph TD
-    A[Sources: RSS/API] --> B[Ingestor Container: ECS Fargate]
+    A[Sources: RSS/API] --> B[Ingestor Lambda]
     B --> C[DynamoDB: Article Store]
-    C --> D[Analyzer: Bedrock Agent]
-    D --> E[Aggregator/Summarizer]
+    C --> D[Analyzer: Bedrock]
+    D --> E[Aggregator/Summarizer Lambda]
   E --> F[Delivery: Email]
     
     subgraph AWS_Infrastructure [AWS Infrastructure]
@@ -63,11 +63,12 @@ graph TD
 
 | Service | Category | Est. Monthly Cost | Metric for Review |
 | :--- | :--- | :--- | :--- |
-| **ECS Fargate** | Compute | $2.00 - $5.00 | CPU/Memory utilization |
-| **DynamoDB** | Storage | $0.00 | Read/Write units |
-| **Bedrock (Claude)** | AI Inference | $1.00 - $2.00 | Input/Output tokens |
-| **CloudWatch** | Observability | $0.50 | Log ingest volume |
-| **Total** | | **~$4.00 - $8.00** | **Total burn rate** |
+| **AWS Lambda** | Compute | $0.50 - $2.00 | Invocations, duration, and error rate |
+| **DynamoDB** | Storage | $0.00 - $1.00 | Read/Write units |
+| **Bedrock (Claude Haiku)** | AI Inference | $1.00 - $2.50 | Input/Output tokens |
+| **CloudWatch** | Observability | $0.25 - $0.75 | Log ingest volume |
+| **SES** | Delivery | $0.00 - $0.50 | Email send volume |
+| **Total** | | **~$1.75 - $6.75** | **Total burn rate** |
 
 ## 6. AI-Ready Integration Schema
 To facilitate code agent refinement, follow this schema for new features:
