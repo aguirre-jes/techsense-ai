@@ -9,10 +9,12 @@ This folder is the source of truth for the TechSense MVP (Phase 1). All future i
 3. [ADR-001-TechStack](./ADR-001-TechStack.md) - why Lambda is the right MVP foundation.
 4. [ADR-002-IaC-Validation-Flow](./ADR-002-IaC-Validation-Flow.md) - how OpenTofu validation stays lightweight for this side project.
 5. [ADR-003-IaC-Source-of-Truth](./ADR-003-IaC-Source-of-Truth.md) - why all AWS resources must be managed through OpenTofu.
-6. [data schemas](./DATA_SCHEMAS.json) - Article contract between ingestion and scoring.
-7. [infra naming conventions](./INFRA_NAMING_CONVENTIONS.md) - AWS resource naming and tagging rules.
-8. [runbook ingestion failure](./RUNBOOK_INGESTION_FAILURE.md) - operational guidance for feed or write failures.
-9. [test specs](./TEST_SPECS.md) - quality gates for the scoring Lambda.
+6. [diagram guidelines](./DIAGRAM_GUIDELINES.md) - the minimum visual set for TechSense and when to add AWS component diagrams.
+7. [diagrams](./diagrams/README.md) - rendered Mingrammer diagrams and generation scripts.
+8. [data schemas](./DATA_SCHEMAS.json) - Article contract between ingestion and scoring.
+9. [infra naming conventions](./INFRA_NAMING_CONVENTIONS.md) - AWS resource naming and tagging rules.
+10. [runbook ingestion failure](./RUNBOOK_INGESTION_FAILURE.md) - operational guidance for feed or write failures.
+11. [test specs](./TEST_SPECS.md) - quality gates for the scoring Lambda.
 
 ## Source of Truth Rules
 
