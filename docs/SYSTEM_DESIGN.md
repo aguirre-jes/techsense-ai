@@ -238,4 +238,4 @@ The following schema is the standard format for future TechSense feature refinem
 - Top five articles selected with stable relevance.
 - Weekly email delivered successfully.
 - Spend remains comfortably inside the $500 annual budget.
-- The system remains simple enough to evolve into the later Fargate-based roadmap without redesigning the data model.
+- The system remains simple enough to evolve into a later container-based design only if a future workload clearly justifies it.
