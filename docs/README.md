@@ -7,10 +7,11 @@ This folder is the source of truth for the TechSense MVP (Phase 1). All future i
 1. [project requirements](../PROJECT_REQUIREMENTS.md) - business goals, roadmap, source shortlist, and budget framing.
 2. [system design](./SYSTEM_DESIGN.md) - MVP architecture, C4 views, cost controls, and AI-ready integration schema.
 3. [ADR-001-TechStack](./ADR-001-TechStack.md) - why Lambda is the right MVP foundation.
-4. [data schemas](./DATA_SCHEMAS.json) - Article contract between ingestion and scoring.
-5. [infra naming conventions](./INFRA_NAMING_CONVENTIONS.md) - AWS resource naming and tagging rules.
-6. [runbook ingestion failure](./RUNBOOK_INGESTION_FAILURE.md) - operational guidance for feed or write failures.
-7. [test specs](./TEST_SPECS.md) - quality gates for the scoring Lambda.
+4. [ADR-002-IaC-Validation-Flow](./ADR-002-IaC-Validation-Flow.md) - how OpenTofu validation stays lightweight for this side project.
+5. [data schemas](./DATA_SCHEMAS.json) - Article contract between ingestion and scoring.
+6. [infra naming conventions](./INFRA_NAMING_CONVENTIONS.md) - AWS resource naming and tagging rules.
+7. [runbook ingestion failure](./RUNBOOK_INGESTION_FAILURE.md) - operational guidance for feed or write failures.
+8. [test specs](./TEST_SPECS.md) - quality gates for the scoring Lambda.
 
 ## Source of Truth Rules
 
