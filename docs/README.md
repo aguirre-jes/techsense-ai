@@ -4,8 +4,8 @@ This folder is the source of truth for the TechSense MVP (Phase 1). All future i
 
 ## Read Order
 
-1. [project requirements](../project_requirements.md) - business goals, roadmap, source shortlist, and budget framing.
-2. [system design](./system_design.md) - MVP architecture, C4 views, cost controls, and AI-ready integration schema.
+1. [project requirements](../PROJECT_REQUIREMENTS.md) - business goals, roadmap, source shortlist, and budget framing.
+2. [system design](./SYSTEM_DESIGN.md) - MVP architecture, C4 views, cost controls, and AI-ready integration schema.
 3. [ADR-001-TechStack](./ADR-001-TechStack.md) - why Lambda is the right MVP foundation.
 4. [data schemas](./DATA_SCHEMAS.json) - Article contract between ingestion and scoring.
 5. [infra naming conventions](./INFRA_NAMING_CONVENTIONS.md) - AWS resource naming and tagging rules.
