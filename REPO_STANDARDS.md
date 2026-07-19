@@ -37,7 +37,7 @@ techsense/
 │   ├── DATA_SCHEMAS.json
 │   ├── INFRA_NAMING_CONVENTIONS.md
 │   ├── RUNBOOK_INGESTION_FAILURE.md
-│   ├── system_design.md
+│   ├── SYSTEM_DESIGN.md
 │   └── TEST_SPECS.md
 ├── tests/
 │   ├── unit/
